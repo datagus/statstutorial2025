@@ -1,4 +1,4 @@
-# statstutorial2025
+# Statistics Tutorial Sommer Semester 2025
 
 Welcome to the repository for the **2025 Statistics Tutorial**.
 
