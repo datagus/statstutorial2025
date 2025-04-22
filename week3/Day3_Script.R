@@ -84,7 +84,7 @@ Pineapple_Pizza[OS == "Apple" | OS == "Microsoft" ]
 table(Pineapple_Pizza[OS == "Apple" | OS == "Microsoft" ],OS[OS == "Apple" | OS == "Microsoft" ])
 chisq.test(table(Pineapple_Pizza[OS == "Apple" | OS == "Microsoft" ],OS[OS == "Apple" | OS == "Microsoft" ])) 
 
-#or 
+# or
 Pineapple <- Pineapple_Pizza[OS == "Apple" | OS == "Microsoft" ]
 OperativeSystem <- OS[OS == "Apple" | OS == "Microsoft" ]
 
@@ -117,30 +117,41 @@ Xsq$expected   # expected counts under the null
 # Is the data independent?
 ?mtcars
 
-### Test for Normality ###
+## creating the data
 cars<-mtcars
-hist(cars$mpg)
-shapiro.test(cars$mpg)
 
-#what bout with log?
-hist(log(cars$mpg))
-shapiro.test(log(cars$mpg))
-
-### Check sample size of groups ###
-table(cars$vs)
-
-## we can create another column with a more explicit name
+# we can create another column with a more explicit name
 cars$engine <- ifelse(cars$vs == 0, "shaped", "straight")
-table(cars$engine)
 
+# let's create new variables where our data is stored
+cars_shaped <- cars$mpg[cars$engine=="shaped"]
+cars_straight <- cars$mpg[cars$engine=="straight"]
+
+### Test for Normality ###
+hist(cars_shaped)
+hist(cars_straight)
+
+shapiro.test(cars_shaped)
+shapiro.test(cars_straight)
+
+#what about with log?
+log_cars_shaped <- 
+log_cars_straight <- 
+
+hist(log_cars_shaped)
+hist(log_cars_straight)
+
+shapiro.test(log_cars_shaped)
+shapiro.test(log_cars_straight)
+
+### Equal Sample size? ###
+table(cars$engine)
 
 ## F-Test (Test for Equality of Variance) #
 # H0 : Ratio of variance is equal to 1 (they have the same variance)
 # H1 : Ratio of variance is NOT equal to 1
 
 #F-test
-cars_shaped <- cars$mpg[cars$transmission=="shaped"]
-cars_straight <- cars$mpg[cars$transmission=="straight"]
 var.test(cars_shaped, cars_straight)
 #p-value?
 
